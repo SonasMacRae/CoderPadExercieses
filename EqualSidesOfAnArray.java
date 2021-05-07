@@ -13,9 +13,11 @@ public static void main(String[] args) {
         for (int i = 0; i < intArray.length; i++) {
             int leftTotal = 0;
             int rightTotal = 0;
+                
             for (int j = 0; j < i; j++) {
                 leftTotal += intArray[j];
             }
+                
             for (int k = i; k < intArray.length; k++) {
                 rightTotal += intArray[k];
             }
