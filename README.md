@@ -10,6 +10,11 @@ You are going to be given an array of integers. Your job is to take that array a
 ## Human Readable Time
 Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
 
+## Sudoku Solution Validator
+Write a function validSolution/ValidateSolution/valid_solution() that accepts a 2D array representing a Sudoku board, and returns true if it is a valid solution, or false otherwise. The cells of the sudoku board may also contain 0's, which will represent empty cells. Boards containing one or more zeroes are considered to be invalid solutions.
+
+The board is always 9 cells by 9 cells, and every cell only contains integers from 0 to 9.
+
 ## Valid Parentheses
 Write a function that takes a string of parentheses, and determines if the order of the parentheses is valid. The function should return true if the string is valid, and false if it's invalid.
 
