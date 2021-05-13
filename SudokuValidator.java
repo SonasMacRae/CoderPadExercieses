@@ -1,8 +1,9 @@
 package com.company;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Main {
 
@@ -20,13 +21,14 @@ public class Main {
 
         System.out.println(HorizontalValidation(sudoku));
         System.out.println(VerticalValidation(sudoku));
+        System.out.println(SquareValidation(sudoku));
     }
 
     public static boolean HorizontalValidation(int[][] sudoku) {
         for (int i = 0; i < sudoku.length; i++) {
-             if (!Validation(sudoku[i])) {
-                 return false;
-             }
+            if (!Validation(sudoku[i])) {
+                return false;
+            }
         }
 
         return true;
@@ -40,13 +42,9 @@ public class Main {
                 temp.add(sudoku[j][i]);
             }
 
-            int[] ret = new int[temp.size()];
-            for (int k = 0; k < ret.length; k++)
-            {
-                ret[k] = temp.get(k).intValue();
-            }
+            int[] verticalArray = ListToArray(temp);
 
-            if (!Validation(ret)) {
+            if (!Validation(verticalArray)) {
                 return false;
             }
             temp.clear();
@@ -55,10 +53,68 @@ public class Main {
         return true;
     }
 
-    public static boolean SquareValidation(int[][] Sudoku) {
+
+    public static int[] ListToArray(List<Integer> inputList) {
+        int[] ret = new int[inputList.size()];
+
+        for (int k = 0; k < ret.length; k++)
+        {
+            ret[k] = inputList.get(k).intValue();
+        }
+
+        return ret;
+    }
+
+    public static boolean SquareValidation(int[][] sudoku) {
+
+        if (!Validation(BuildSquare(new Pair<>(0,0), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(0,3), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(0,6), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(3,0), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(3,3), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(3,6), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(6,0), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(6,3), sudoku))) {
+            return false;
+        }
+        if (!Validation(BuildSquare(new Pair<>(6,6), sudoku))) {
+            return false;
+        }
 
 
         return true;
+    }
+
+    // Takes the top left co-ordinate of a square and return the rest of the co-ordinates
+    public static int[] BuildSquare(Pair<Integer, Integer> coordinate, int[][] sudoku) {
+        ArrayList<Integer> square = new ArrayList<>();
+
+        int xcoord = coordinate.getKey();
+        int ycoord = coordinate.getValue();
+
+        for (int i = xcoord; i < xcoord + 3; i++) {
+            for (int j = ycoord; j < ycoord + 3; j++) {
+                square.add(sudoku[i][j]);
+            }
+        }
+
+        int[] squareArray = ListToArray(square);
+
+        return squareArray;
     }
 
     public static boolean Validation(int[] inputArray) {
@@ -76,5 +132,4 @@ public class Main {
 
         return false;
     }
-
 }
